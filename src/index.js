@@ -26,35 +26,7 @@ const setupWallet = async () => {
     })
     ClientCtrl.setEthereumClient(ethereumClient, chains)
 
-    // Detects when an account is connected, when an account is disconnected
-    // and when an account is changed with a different wallet
-    ethereumClient.watchAccount(async change => {
-        document.querySelector('#wallet').innerHTML = change.address || ''
-        if (change.address) {
-            document.querySelector('#asset-container').innerHTML = ''
-            document.querySelector('#loading-assets').style.display = 'inherit'
-            document.querySelector('#connect-message').style.display = 'none'
-            document.querySelector('#loading-positions').style.display = 'none'
-            await getAssets('0xC36442b4a4522E871399CD717aBDD847Ab11FE88')
-            // await getAssets(change.address)
-            document.querySelector('#loading-positions').style.display = 'inherit'
-            await getPositions('0x7c5bAe6BC84AE74954Fd5672feb6fB31d2182EC6')
-            //await getPositions(change.address)
-            // await getPositions(change.address)
-            document.querySelector('#loading-positions').style.display = 'none'
-            document.querySelector('#connect-message').style.display = 'none'
-            document.querySelector('#loading-assets').style.display = 'none'
-        } else {
-            document.querySelector('#connect-message').style.display = 'inherit'
-            document.querySelector('#loading-assets').style.display = 'none'
-            document.querySelector('#asset-container').innerHTML = ''
-            document.querySelector('#loading-positions').style.display = 'none'
-        }
-    })
-
-    // 5. Import ui package after all configuration has been completed
-    await import('@web3modal/ui')
-}
+  
 
 const getAssets = async wallet => {
     console.log('getting assets')
