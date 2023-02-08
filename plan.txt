@@ -1,0 +1,31 @@
+- Get the function getDefiOpportunities done in the server
+
+Request opportunities from the API:
+
+opportunities: [{
+    first: 50,
+}, {
+    farm: {
+        slug: true,
+        logo: true,
+    },
+    totalValueLocked: true,
+    tokens: {
+        rewards: {
+            displayName: true,
+        }
+    },
+    apr: true,
+}]
+
+Then format it properly by going through the array like so:
+
+const resultsFormatted = result.data.opportunities.map(item => {
+		return {
+			slug: item.farm.slug,
+			logo: item.farm.logo,
+			totalValueLocked: item.totalValueLocked,
+			rewards: item.tokens.rewards.map(reward => reward.displayName).join(' + '),
+			apr: item.apr,
+		}
+	})

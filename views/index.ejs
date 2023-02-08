@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi Dashboard</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .asset {
+            background-color: whitesmoke;
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            border: 1px solid grey;
+        }
+
+        #asset-container {
+            padding-left: 0;
+        }
+
+        .page {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        #loading-assets {
+            text-align: center;
+            display: none;
+        }
+
+        #connect-message {
+            text-align: center;
+        }
+
+        #net-worth-container {
+            display: none;
+        }
+
+        #loading-positions, #staking-positions, #staking-positions-title {
+            display: none;
+        }
+
+        #staking-positions {
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+            padding-left: 0;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .defi-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .defi-buttons button {
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 12pt;
+            cursor: pointer;
+            background-color: white;
+            border: 1px solid #47a1ff;
+            color: #47a1ff;
+        }
+
+        .defi-buttons button:first-child {
+            margin-right: 20px;
+        }
+
+        .defi-buttons button:hover {
+            transform: scale(1.1);
+        }
+
+        .defi-buttons button.selected {
+            background-color: #47a1ff;
+            color: white;
+            border: none;
+        }
+
+        .opportunities-page {
+            display: none;
+        }
+
+        .staking-opportunities-table {
+            width: 100%;
+            text-align: center;
+        }
+
+        .opportunities-item-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .opportunities-item-name img {
+            height: 50px;
+            border-radius: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                gap: 10px;
+                flex-direction: column;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="defi-buttons">
+        <button type="button" class="selected" data-defi="dashboard">Your DeFi Dashboard</button>
+        <button type="button" data-defi="opportunities">DeFi Opportunities</button>
+    </div>
+
+    <div class="dashboard-page page">
+        <h1 class="title">Your DeFi Dashboard</h1>
+
+        <header class="header">
+            <div id="wallet"></div>
+            <w3m-core-button></w3m-core-button>
+            <w3m-modal id="main-modal"></w3m-modal>
+        </header>
+    
+        <p id="connect-message">Connect wallet to see your assets</p>
+        <p id="loading-assets">Loading assets this may take a while, checking 35 blockchains...</p>
+
+        <h3 class="align-center" id="net-worth-container">Net worth: $<span id="net-worth"></span></h3>
+        <ul id="asset-container"></ul>
+
+        <p id="loading-positions" class="align-center">Loading positions from 151 protocols, this will take a while...</p>
+
+        <h3 class="align-center" id="staking-positions-title">Staking positions</h3>
+        <ul id="staking-positions"></ul>
+    </div>
+
+    <div class="opportunities-page page">
+        <h1 class="title">DeFi Staking Opportunities</h1>
+        <table class="staking-opportunities-table">
+            <thead>
+                <tr>
+                    <th>Market</th>
+                    <th>Chain</th>
+                    <th>Token</th>
+                    <th>Category</th>
+                    <th>TVL</th>
+                    <th>Rewards</th>
+                    <th>APR</th>
+                </tr>
+            </thead>
+            <tbody id="opportunities-items">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="build.js"></script>
+</body>
+</html>
